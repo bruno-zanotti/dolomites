@@ -197,6 +197,7 @@ const tl = document.getElementById('timeline');
 days.forEach((d, i) => {
   const row = document.createElement('div');
   row.className = 'day-row';
+  row.style.setProperty('--i', i);
 
   const actsHtml = d.acts.map(a =>
     `<div class="act">
@@ -225,6 +226,7 @@ days.forEach((d, i) => {
           <div class="card-sub">${d.sub}</div>
         </div>
         <div class="card-header-right">
+          ${d.photo ? `<div class="card-thumb"><img src="${d.photo}" alt="${d.name}" loading="lazy"></div>` : ''}
           ${d.warn ? `<div class="warn-badge"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 2L14.5 13H1.5L8 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><line x1="8" y1="7" x2="8" y2="10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="11.5" r="0.7" fill="currentColor"/></svg> note</div>` : ''}
           <span class="chevron">▾</span>
         </div>
