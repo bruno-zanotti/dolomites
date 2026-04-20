@@ -249,12 +249,12 @@ days.forEach((d, i) => {
 
   const card = row.querySelector('.day-card');
   card.addEventListener('click', () => {
-    row.classList.toggle('open');
-    if (row.classList.contains('open')) {
+    const isOpen = row.classList.contains('open');
+    document.querySelectorAll('.day-row.open').forEach(r => r.classList.remove('open'));
+    if (!isOpen) {
+      row.classList.add('open');
       const photoEl = row.querySelector('[id^="photo-"]');
-      if (photoEl && photoEl.querySelector('.photo-skeleton')) {
-        loadPhoto(d);
-      }
+      if (photoEl && photoEl.querySelector('.photo-skeleton')) loadPhoto(d);
       focusMapDay(d.num);
     }
   });
@@ -276,7 +276,7 @@ toggle.addEventListener('click', () => {
 
 // ── MAP ──
 const stops = [
-  { day:1,  name:"Milan Malpensa",    lat:45.6227, lng:8.7282,  sleep:false, color:"#888780" },
+  { day:1,  name:"Milan",              lat:45.4654, lng:9.1859,  sleep:false, color:"#888780" },
   { day:1,  name:"Lago Maggiore",      lat:45.9968, lng:8.6536,  sleep:true,  color:"#2B5C3F" },
   { day:2,  name:"Lago di Carezza",    lat:46.4092, lng:11.5751, sleep:false, color:"#4A8C65" },
   { day:2,  name:"Val di Fassa",       lat:46.4333, lng:11.7000, sleep:true,  color:"#2B5C3F" },
@@ -310,14 +310,6 @@ let leafletMap, leafletMarkers;
     maxZoom: 19,
   }).addTo(leafletMap);
 
-  const routeCoords = stops.map(s => [s.lat, s.lng]);
-  L.polyline(routeCoords, {
-    color: '#2B5C3F',
-    weight: 2.5,
-    opacity: 0.75,
-    dashArray: '8 6',
-  }).addTo(leafletMap);
-
   function makeIcon(color, size) {
     const r = size / 2;
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
@@ -326,17 +318,37 @@ let leafletMap, leafletMarkers;
     return L.divIcon({ html: svg, className: '', iconSize: [size, size], iconAnchor: [r, r], popupAnchor: [0, -r] });
   }
 
+  const isKeyStop = s => s.sleep || s.name === 'Milan' || s.name === 'Milan Malpensa';
   leafletMarkers = stops.map(s => {
-    const size = s.sleep || s.name === 'Milan Malpensa' ? 18 : 12;
+    const size = isKeyStop(s) ? 18 : 12;
     return L.marker([s.lat, s.lng], { icon: makeIcon(s.color, size) })
       .addTo(leafletMap)
       .bindPopup(`<strong>${s.name}</strong><br><span style="font-size:11px;color:#888">Day ${s.day}${s.sleep ? ' · sleep' : ''}</span>`);
   });
+
+  // Draw straight-line fallback, then replace with real road geometry from OSRM
+  let routeLine = L.polyline(stops.map(s => [s.lat, s.lng]), {
+    color: '#2B5C3F', weight: 2.5, opacity: 0.6, dashArray: '8 6',
+  }).addTo(leafletMap);
+
+  (async function fetchRoadRoute() {
+    try {
+      const coords = stops.map(s => `${s.lng},${s.lat}`).join(';');
+      const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`);
+      const data = await res.json();
+      if (data.code === 'Ok' && data.routes?.[0]) {
+        const latlngs = data.routes[0].geometry.coordinates.map(([lng, lat]) => [lat, lng]);
+        leafletMap.removeLayer(routeLine);
+        routeLine = L.polyline(latlngs, {
+          color: '#2B5C3F', weight: 2.5, opacity: 0.75, dashArray: '8 6',
+        }).addTo(leafletMap);
+      }
+    } catch(e) { /* keep fallback */ }
+  })();
 })();
 
 function focusMapDay(dayNum) {
-  const stopIdx = stops.findIndex(s => s.day === dayNum && s.sleep)
-    ?? stops.findIndex(s => s.day === dayNum);
+  const stopIdx = stops.findIndex(s => s.day === dayNum);
   if (stopIdx === -1) return;
   const marker = leafletMarkers[stopIdx];
   leafletMap.setView(marker.getLatLng(), 11, { animate: true });
