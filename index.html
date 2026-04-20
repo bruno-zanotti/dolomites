@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dolomites Van Trip — 25 May–2 Jun 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+  <svg class="toggle-icon icon-moon" viewBox="0 0 14 14" fill="none">
+    <path d="M12.5 8.5A5.5 5.5 0 015.5 1.5a5.5 5.5 0 000 11 5.5 5.5 0 007-4z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+  </svg>
+  <svg class="toggle-icon icon-sun" viewBox="0 0 14 14" fill="none">
+    <circle cx="7" cy="7" r="2.8" stroke="currentColor" stroke-width="1.2"/>
+    <line x1="7" y1="1" x2="7" y2="2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="7" y1="11.5" x2="7" y2="13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="1" y1="7" x2="2.5" y2="7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="11.5" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="2.93" y1="2.93" x2="4" y2="4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="10" y1="10" x2="11.07" y2="11.07" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="11.07" y1="2.93" x2="10" y2="4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="4" y1="10" x2="2.93" y2="11.07" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>
+  <span id="themeLabel">Dark</span>
+</button>
+
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-eyebrow">Van trip · Italy</div>
+    <h1 class="hero-title">The <em>Dolomites</em><br>by van</h1>
+    <p class="hero-sub">Milan Malpensa · 25 May – 2 June 2025 · 2 people</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-val">9</span>
+        <span class="hero-meta-lbl">days</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-val">~750km</span>
+        <span class="hero-meta-lbl">driving</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-val">8</span>
+        <span class="hero-meta-lbl">hikes & viewpoints</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-val">5</span>
+        <span class="hero-meta-lbl">must-book spots</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="booking-banner">
+    <svg class="booking-banner-icon" viewBox="0 0 18 18" fill="none">
+      <path d="M9 2L16 14.5H2L9 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+      <line x1="9" y1="7.5" x2="9" y2="11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="9" cy="12.5" r="0.7" fill="currentColor"/>
+    </svg>
+    <div class="booking-banner-text">
+      Book before you go —
+      <span>Lago di Braies parking, Rifugio Auronzo overnight, Tre Cime road entry (€35–40). These sell out weeks in advance.</span>
+    </div>
+  </div>
+
+  <div class="timeline" id="timeline"></div>
+
+  <div class="legend">
+    <span class="legend-label">Activities</span>
+    <span class="leg"><span class="leg-dot dot-hike"></span>Hike</span>
+    <span class="leg"><span class="leg-dot dot-view"></span>Viewpoint</span>
+    <span class="leg"><span class="leg-dot dot-drive"></span>Drive</span>
+    <span class="leg"><span class="leg-dot dot-food"></span>Food &amp; rest</span>
+  </div>
+
+  <div class="map-section">
+    <div class="map-header">
+      <div class="map-title-row">
+        <h2 class="map-title">The route</h2>
+        <span class="map-subtitle">9 days · ~750km · Milan → Dolomites loop → Milan</span>
+      </div>
+    </div>
+    <div class="map-container" id="map"></div>
+    <div class="map-stops" id="mapStops"></div>
+  </div>
+
+  <footer class="footer">
+    <span class="footer-text">Generated May 2025</span>
+    <span class="footer-title">Buon viaggio ✦</span>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
