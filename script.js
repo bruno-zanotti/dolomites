@@ -297,7 +297,7 @@ let leafletMap, leafletMarkers;
   leafletMap = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([46.3, 11.0], 8);
 
   document.getElementById('map').addEventListener('wheel', function(e) {
-    if (e.ctrlKey) {
+    if (e.metaKey) {
       e.preventDefault();
       if (e.deltaY < 0) leafletMap.zoomIn();
       else leafletMap.zoomOut();
