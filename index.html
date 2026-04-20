@@ -33,28 +33,34 @@
 <div class="page">
 
   <header class="hero">
-    <div class="hero-eyebrow">Van trip · Italy</div>
-    <h1 class="hero-title">The <em>Dolomites</em><br>by van</h1>
-    <p class="hero-sub">Milan Malpensa · 25 May – 2 June 2025 · 2 people</p>
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <span class="hero-meta-val">9</span>
-        <span class="hero-meta-lbl">days</span>
+    <img class="hero-cover-img" src="images/Tre_Cime_di_Lavaredo.jpg" alt="Tre Cime di Lavaredo, Dolomites">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Van trip · Italy</div>
+        <h1 class="hero-title">The <em>Dolomites</em><br>by van</h1>
+        <p class="hero-sub">Milan Malpensa · 25 May – 2 June 2025 · 2 people</p>
       </div>
-      <div class="hero-divider"></div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-val">~750km</span>
-        <span class="hero-meta-lbl">driving</span>
-      </div>
-      <div class="hero-divider"></div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-val">8</span>
-        <span class="hero-meta-lbl">hikes & viewpoints</span>
-      </div>
-      <div class="hero-divider"></div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-val">5</span>
-        <span class="hero-meta-lbl">must-book spots</span>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-val">9</span>
+          <span class="hero-meta-lbl">days</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-val">~750km</span>
+          <span class="hero-meta-lbl">driving</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-val">8</span>
+          <span class="hero-meta-lbl">hikes & viewpoints</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-val">5</span>
+          <span class="hero-meta-lbl">must-book spots</span>
+        </div>
       </div>
     </div>
   </header>
@@ -83,7 +89,14 @@
       </div>
     </aside>
     <div class="map-panel">
-      <div class="map-container" id="map"></div>
+      <div class="map-inner">
+        <div class="map-container" id="map"></div>
+        <div class="map-style-switcher" id="mapStyleSwitcher">
+          <button class="map-style-btn active" data-style="standard">Map</button>
+          <button class="map-style-btn" data-style="topo">Topo</button>
+          <button class="map-style-btn" data-style="satellite">Satellite</button>
+        </div>
+      </div>
     </div>
   </div>
 

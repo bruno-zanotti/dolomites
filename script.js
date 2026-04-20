@@ -269,7 +269,6 @@ toggle.addEventListener('click', () => {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
   label.textContent = isDark ? 'Dark' : 'Light';
-  swapMapTiles(isDark ? 'light' : 'dark');
 });
 
 // ── MAP ──
@@ -291,20 +290,26 @@ const stops = [
 
 let leafletMap, leafletMarkers, currentTile;
 
-const tileUrls = {
-  light: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-  dark:  'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-};
-const tileOpts = {
-  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-  subdomains: 'abcd',
-  maxZoom: 19,
+const tileConfigs = {
+  standard: {
+    url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    opts: { attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>', subdomains: 'abcd', maxZoom: 19 },
+  },
+  topo: {
+    url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+    opts: { attribution: 'Map data: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | © <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)', subdomains: 'abc', maxZoom: 17 },
+  },
+  satellite: {
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    opts: { attribution: 'Tiles &copy; Esri — Esri, USGS, USDA, and GIS User Community', maxZoom: 18 },
+  },
 };
 
-function swapMapTiles(theme) {
+function setMapStyle(style) {
   if (!leafletMap) return;
   if (currentTile) leafletMap.removeLayer(currentTile);
-  currentTile = L.tileLayer(tileUrls[theme], tileOpts).addTo(leafletMap);
+  const cfg = tileConfigs[style];
+  currentTile = L.tileLayer(cfg.url, cfg.opts).addTo(leafletMap);
   currentTile.bringToBack();
 }
 
@@ -319,16 +324,16 @@ function swapMapTiles(theme) {
     }
   }, { passive: false });
 
-  currentTile = L.tileLayer(tileUrls.light, tileOpts).addTo(leafletMap);
+  currentTile = L.tileLayer(tileConfigs.standard.url, tileConfigs.standard.opts).addTo(leafletMap);
 
   function makeIcon(isSleep) {
     if (isSleep) {
       return L.divIcon({
-        html: `<i class="fa-solid fa-tent" style="font-size:18px;color:#2B5C3F;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.4))"></i>`,
+        html: `<div style="width:30px;height:30px;background:#2B5C3F;border-radius:50%;border:2.5px solid rgba(255,255,255,0.92);box-shadow:0 2px 8px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 18 18" fill="none" style="width:14px;height:14px"><path d="M1 15L9 3L17 15H1Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="rgba(255,255,255,0.18)"/><path d="M6 15v-4a3 3 0 0 1 6 0v4" fill="white"/></svg></div>`,
         className: '',
-        iconSize: [22, 22],
-        iconAnchor: [11, 11],
-        popupAnchor: [0, -14],
+        iconSize: [30, 30],
+        iconAnchor: [15, 15],
+        popupAnchor: [0, -18],
       });
     }
     return L.divIcon({
@@ -366,6 +371,14 @@ function swapMapTiles(theme) {
     } catch(e) { /* keep fallback */ }
   })();
 })();
+
+document.querySelectorAll('.map-style-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.map-style-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    setMapStyle(btn.dataset.style);
+  });
+});
 
 function focusMapDay(dayNum) {
   const stopIdx = stops.findIndex(s => s.day === dayNum);
