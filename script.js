@@ -276,19 +276,19 @@ toggle.addEventListener('click', () => {
 
 // ── MAP ──
 const stops = [
-  { day:1,  name:"Milan",              lat:45.4654, lng:9.1859,  sleep:false, color:"#888780" },
-  { day:1,  name:"Lago Maggiore",      lat:45.9968, lng:8.6536,  sleep:true,  color:"#2B5C3F" },
-  { day:2,  name:"Lago di Carezza",    lat:46.4092, lng:11.5751, sleep:false, color:"#4A8C65" },
-  { day:2,  name:"Val di Fassa",       lat:46.4333, lng:11.7000, sleep:true,  color:"#2B5C3F" },
-  { day:3,  name:"Passo Sella",        lat:46.5092, lng:11.7583, sleep:true,  color:"#2B5C3F" },
-  { day:4,  name:"Seceda / Ortisei",   lat:46.5748, lng:11.6711, sleep:true,  color:"#2B5C3F" },
-  { day:5,  name:"Santa Maddalena",    lat:46.6447, lng:11.7194, sleep:false, color:"#4A8C65" },
-  { day:5,  name:"Lago di Braies",     lat:46.6943, lng:12.0854, sleep:true,  color:"#2B5C3F" },
-  { day:6,  name:"Rifugio Auronzo",    lat:46.6122, lng:12.2962, sleep:true,  color:"#2B5C3F" },
-  { day:7,  name:"Sorapis / Cortina",  lat:46.5578, lng:12.2036, sleep:true,  color:"#2B5C3F" },
-  { day:8,  name:"Passo Giau",         lat:46.4831, lng:12.0542, sleep:false, color:"#4A8C65" },
-  { day:8,  name:"Lago di Alleghe",    lat:46.4065, lng:12.0162, sleep:true,  color:"#2B5C3F" },
-  { day:9,  name:"Milan Malpensa",     lat:45.6227, lng:8.7282,  sleep:false, color:"#888780" },
+  { day:1,  name:"Milan",              lat:45.4654, lng:9.1859,  sleep:false, emoji:"✈️"  },
+  { day:1,  name:"Sirmione",           lat:45.4957, lng:10.6088, sleep:true,  emoji:"⛺"  },
+  { day:2,  name:"Lago di Carezza",    lat:46.4092, lng:11.5751, sleep:false, emoji:"🏞️" },
+  { day:2,  name:"Val di Fassa",       lat:46.4333, lng:11.7000, sleep:true,  emoji:"⛺"  },
+  { day:3,  name:"Passo Sella",        lat:46.5092, lng:11.7583, sleep:true,  emoji:"🏔️" },
+  { day:4,  name:"Seceda / Ortisei",   lat:46.5748, lng:11.6711, sleep:true,  emoji:"🥾" },
+  { day:5,  name:"Santa Maddalena",    lat:46.6447, lng:11.7194, sleep:false, emoji:"📸"  },
+  { day:5,  name:"Lago di Braies",     lat:46.6943, lng:12.0854, sleep:true,  emoji:"🏞️" },
+  { day:6,  name:"Rifugio Auronzo",    lat:46.6122, lng:12.2962, sleep:true,  emoji:"⛺"  },
+  { day:7,  name:"Sorapis / Cortina",  lat:46.5578, lng:12.2036, sleep:true,  emoji:"🥾" },
+  { day:8,  name:"Passo Giau",         lat:46.4831, lng:12.0542, sleep:false, emoji:"🏔️" },
+  { day:8,  name:"Lago di Alleghe",    lat:46.4065, lng:12.0162, sleep:true,  emoji:"🏞️" },
+  { day:9,  name:"Milan Malpensa",     lat:45.6227, lng:8.7282,  sleep:false, emoji:"✈️"  },
 ];
 
 let leafletMap, leafletMarkers;
@@ -310,21 +310,21 @@ let leafletMap, leafletMarkers;
     maxZoom: 19,
   }).addTo(leafletMap);
 
-  function makeIcon(color, size) {
-    const r = size / 2;
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-      <circle cx="${r}" cy="${r}" r="${r - 1.5}" fill="${color}" stroke="#fff" stroke-width="2"/>
-    </svg>`;
-    return L.divIcon({ html: svg, className: '', iconSize: [size, size], iconAnchor: [r, r], popupAnchor: [0, -r] });
+  function makeIcon(emoji) {
+    return L.divIcon({
+      html: `<div style="font-size:22px;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.35))">${emoji}</div>`,
+      className: '',
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -16],
+    });
   }
 
-  const isKeyStop = s => s.sleep || s.name === 'Milan' || s.name === 'Milan Malpensa';
-  leafletMarkers = stops.map(s => {
-    const size = isKeyStop(s) ? 18 : 12;
-    return L.marker([s.lat, s.lng], { icon: makeIcon(s.color, size) })
+  leafletMarkers = stops.map(s =>
+    L.marker([s.lat, s.lng], { icon: makeIcon(s.emoji) })
       .addTo(leafletMap)
-      .bindPopup(`<strong>${s.name}</strong><br><span style="font-size:11px;color:#888">Day ${s.day}${s.sleep ? ' · sleep' : ''}</span>`);
-  });
+      .bindPopup(`<strong>${s.name}</strong><br><span style="font-size:11px;color:#888">Day ${s.day}${s.sleep ? ' · sleep' : ''}</span>`)
+  );
 
   // Draw straight-line fallback, then replace with real road geometry from OSRM
   let routeLine = L.polyline(stops.map(s => [s.lat, s.lng]), {
