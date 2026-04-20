@@ -296,6 +296,14 @@ let leafletMap, leafletMarkers;
 (function buildLeafletMap() {
   leafletMap = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([46.3, 11.0], 8);
 
+  document.getElementById('map').addEventListener('wheel', function(e) {
+    if (e.ctrlKey) {
+      e.preventDefault();
+      if (e.deltaY < 0) leafletMap.zoomIn();
+      else leafletMap.zoomOut();
+    }
+  }, { passive: false });
+
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
