@@ -255,6 +255,7 @@ days.forEach((d, i) => {
       if (photoEl && photoEl.querySelector('.photo-skeleton')) {
         loadPhoto(d);
       }
+      focusMapDay(d.num);
     }
   });
   tl.appendChild(row);
@@ -290,81 +291,46 @@ const stops = [
   { day:9,  name:"Milan Malpensa",     lat:45.6227, lng:8.7282,  sleep:false, color:"#888780" },
 ];
 
-(function buildStopCards() {
-  const stopsEl = document.getElementById('mapStops');
-  const seen = new Set();
-  let cardIdx = 1;
-  stops.forEach((s, i) => {
-    const key = s.name + s.day;
-    if (seen.has(key)) return;
-    seen.add(key);
-    const el = document.createElement('div');
-    el.className = 'map-stop';
-    el.dataset.stopIdx = i;
-    el.innerHTML = `
-      <div class="map-stop-num" style="background:${s.color}">${cardIdx++}</div>
-      <div class="map-stop-info">
-        <div class="map-stop-name">${s.name}</div>
-        <div class="map-stop-day">Day ${s.day}${s.sleep ? ' · sleep' : ''}</div>
-      </div>`;
-    stopsEl.appendChild(el);
-  });
-})();
+let leafletMap, leafletMarkers;
 
 (function buildLeafletMap() {
-  const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([46.3, 11.0], 8);
+  leafletMap = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([46.3, 11.0], 8);
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 19,
-  }).addTo(map);
+  }).addTo(leafletMap);
 
-  // Dashed route polyline
   const routeCoords = stops.map(s => [s.lat, s.lng]);
   L.polyline(routeCoords, {
     color: '#2B5C3F',
     weight: 2.5,
     opacity: 0.75,
     dashArray: '8 6',
-  }).addTo(map);
+  }).addTo(leafletMap);
 
-  // Custom circular marker icon
   function makeIcon(color, size) {
     const r = size / 2;
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
       <circle cx="${r}" cy="${r}" r="${r - 1.5}" fill="${color}" stroke="#fff" stroke-width="2"/>
     </svg>`;
-    return L.divIcon({
-      html: svg,
-      className: '',
-      iconSize: [size, size],
-      iconAnchor: [r, r],
-      popupAnchor: [0, -r],
-    });
+    return L.divIcon({ html: svg, className: '', iconSize: [size, size], iconAnchor: [r, r], popupAnchor: [0, -r] });
   }
 
-  // Add markers and store references for stop-card clicks
-  const leafletMarkers = stops.map(s => {
+  leafletMarkers = stops.map(s => {
     const size = s.sleep || s.name === 'Milan Malpensa' ? 18 : 12;
-    const marker = L.marker([s.lat, s.lng], { icon: makeIcon(s.color, size) })
-      .addTo(map)
+    return L.marker([s.lat, s.lng], { icon: makeIcon(s.color, size) })
+      .addTo(leafletMap)
       .bindPopup(`<strong>${s.name}</strong><br><span style="font-size:11px;color:#888">Day ${s.day}${s.sleep ? ' · sleep' : ''}</span>`);
-    return marker;
-  });
-
-  // Wire up stop card clicks — pan to marker and open popup
-  document.querySelectorAll('.map-stop').forEach(card => {
-    card.addEventListener('click', () => {
-      const idx = parseInt(card.dataset.stopIdx);
-      const marker = leafletMarkers[idx];
-      if (marker) {
-        map.setView(marker.getLatLng(), 11, { animate: true });
-        marker.openPopup();
-      }
-      document.querySelectorAll('.map-stop').forEach(c => c.style.borderColor = '');
-      card.style.borderColor = 'var(--accent)';
-      setTimeout(() => { card.style.borderColor = ''; }, 1500);
-    });
   });
 })();
+
+function focusMapDay(dayNum) {
+  const stopIdx = stops.findIndex(s => s.day === dayNum && s.sleep)
+    ?? stops.findIndex(s => s.day === dayNum);
+  if (stopIdx === -1) return;
+  const marker = leafletMarkers[stopIdx];
+  leafletMap.setView(marker.getLatLng(), 11, { animate: true });
+  marker.openPopup();
+}
