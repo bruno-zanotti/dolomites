@@ -3,7 +3,7 @@ const days = [
     num:1, day:"Mon", date:"25", month:"May",
     name:"Arrival — Milan & first night",
     sub:"Van pickup · groceries · dinner in Milan",
-    wikiPage:"Navigli,_Milan",
+    photo:"images/Navigli_Milan.jpg",
     wikiCaption:"Navigli canals, Milan",
     acts:[
       {time:"14:40", type:"drive",  label:"Land at Malpensa — collect bags"},
@@ -22,7 +22,7 @@ const days = [
     num:2, day:"Tue", date:"26", month:"May",
     name:"Milan → Lago di Carezza → Val di Fassa",
     sub:"~4h drive · emerald UNESCO lake · valley base",
-    wikiPage:"Karersee",
+    photo:"images/Karersee.jpg",
     wikiCaption:"Lago di Carezza (Karersee), South Tyrol",
     acts:[
       {time:"08:00", type:"drive",  label:"Leave Lago Maggiore area"},
@@ -41,7 +41,7 @@ const days = [
     num:3, day:"Wed", date:"27", month:"May",
     name:"Torres del Vajolet + Passo Sella",
     sub:"Catinaccio towers hike · sunset at 2,240m pass",
-    wikiPage:"Vajolet_Towers",
+    photo:"images/Vajolet_Towers.JPG",
     wikiCaption:"Torres del Vajolet, Catinaccio massif",
     acts:[
       {time:"08:00", type:"drive",  label:"Drive to Pera di Fassa trailhead (~20 min)"},
@@ -61,7 +61,7 @@ const days = [
     num:4, day:"Thu", date:"28", month:"May",
     name:"Seceda + Alpe di Siusi",
     sub:"Iconic blade ridgeline · Europe's largest alpine plateau",
-    wikiPage:"Seceda",
+    photo:"images/Seceda.jpg",
     wikiCaption:"Seceda ridgeline and Odle peaks, Val Gardena",
     acts:[
       {time:"08:00", type:"drive",  label:"Drive to Ortisei cable car station (~20 min)"},
@@ -81,7 +81,7 @@ const days = [
     num:5, day:"Fri", date:"29", month:"May",
     name:"Val di Funes → Lago di Braies",
     sub:"THE postcard church · golden hour · turquoise lake arrival",
-    wikiPage:"Val_di_Funes",
+    photo:"images/Val_di_Funes.jpg",
     wikiCaption:"Santa Maddalena church, Val di Funes",
     acts:[
       {time:"09:00", type:"drive",  label:"Drive to Val di Funes — Santa Maddalena (~35 min)"},
@@ -101,7 +101,7 @@ const days = [
     num:6, day:"Sat", date:"30", month:"May",
     name:"Braies · Misurina lakes · Tre Cime",
     sub:"Morning rowboat · scenic lake chain · iconic 10km circuit",
-    wikiPage:"Pragser_Wildsee",
+    photo:"images/Pragser_Wildsee.jpg",
     wikiCaption:"Lago di Braies (Pragser Wildsee)",
     acts:[
       {time:"07:00", type:"view",   label:"Early morning walk — lake before the crowds arrive"},
@@ -122,7 +122,7 @@ const days = [
     num:7, day:"Sun", date:"31", month:"May",
     name:"Cadini sunrise + Lago di Sorapis",
     sub:"Pre-dawn viewpoint · glacial turquoise lake hike",
-    wikiPage:"Tre_Cime_di_Lavaredo",
+    photo:"images/Tre_Cime_di_Lavaredo.jpg",
     wikiCaption:"Tre Cime di Lavaredo, Sexten Dolomites",
     acts:[
       {time:"04:30", type:"hike",   label:"Start hike to Cadini viewpoint — trail 117 (~45 min up)"},
@@ -144,7 +144,7 @@ const days = [
     num:8, day:"Mon", date:"1", month:"Jun",
     name:"Passo Giau · Cinque Torri · Marmolada · Alleghe",
     sub:"Finest pass in the Dolomites · WWI museum · glacier · final night",
-    wikiPage:"Passo_Giau",
+    photo:"images/Passo_Giau.jpg",
     wikiCaption:"Passo Giau (2,233m), Dolomites",
     acts:[
       {time:"08:00", type:"drive",  label:"Drive up to Passo Giau (2,233m) — ~30 min from Cortina"},
@@ -167,7 +167,7 @@ const days = [
     num:9, day:"Tue", date:"2", month:"Jun",
     name:"Return to Milan Malpensa",
     sub:"~4.5h drive · van return by 18:00",
-    wikiPage:"Alleghe",
+    photo:"images/Alleghe.JPG",
     wikiCaption:"Lago di Alleghe with the Civetta massif",
     acts:[
       {time:"07:00", type:"drive",  label:"Leave Alleghe — early start essential"},
@@ -186,20 +186,10 @@ const iconWarn = `<svg class="warn-box-icon" viewBox="0 0 16 16" fill="none"><pa
 const iconInfo = `<svg class="info-box-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><line x1="8" y1="7" x2="8" y2="11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="8" cy="5" r="0.7" fill="currentColor"/></svg>`;
 const iconSleep = `<svg class="sleep-icon" viewBox="0 0 20 20" fill="none"><path d="M3 13.5C3 10.46 5.46 8 8.5 8C9.77 8 10.94 8.43 11.87 9.16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M4 16H16M4 16C4 14.9 4.9 14 6 14H14C15.1 14 16 14.9 16 16M4 16H3M16 16H17" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M12 10H17L14 13H17" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-async function loadPhoto(day) {
+function loadPhoto(day) {
   const el = document.getElementById(`photo-${day.num}`);
-  if (!el || !day.wikiPage) return;
-  try {
-    const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(day.wikiPage)}&prop=pageimages&pithumbsize=900&format=json&origin=*`;
-    const res = await fetch(url);
-    const data = await res.json();
-    const page = Object.values(data.query.pages)[0];
-    const src = page?.thumbnail?.source;
-    if (!src) { el.innerHTML = ''; el.style.display = 'none'; return; }
-    el.innerHTML = `<img src="${src}" alt="${day.name}"><div class="card-photo-caption">${day.wikiCaption} · © Wikipedia / CC</div>`;
-  } catch(e) {
-    el.style.display = 'none';
-  }
+  if (!el || !day.photo) return;
+  el.innerHTML = `<img src="${day.photo}" alt="${day.name}"><div class="card-photo-caption">${day.wikiCaption} · © Wikipedia / CC</div>`;
 }
 
 const tl = document.getElementById('timeline');
@@ -240,7 +230,7 @@ days.forEach((d, i) => {
         </div>
       </div>
       <div class="card-body">
-        ${d.wikiPage ? `<div class="card-photo" id="photo-${d.num}"><div class="photo-skeleton">Loading photo…</div></div>` : ''}
+        ${d.photo ? `<div class="card-photo" id="photo-${d.num}"><div class="photo-skeleton">Loading photo…</div></div>` : ''}
         <div class="card-body-inner">
           <div class="acts-label">Schedule</div>
           <div class="acts">${actsHtml}</div>
