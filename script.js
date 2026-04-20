@@ -311,98 +311,55 @@ const stops = [
   });
 })();
 
-(function buildSVGMap() {
-  const W = 780, H = 460;
-  const pad = 40;
+(function buildLeafletMap() {
+  const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([46.3, 11.0], 8);
 
-  const lngs = stops.map(s => s.lng);
-  const lats = stops.map(s => s.lat);
-  const minLng = Math.min(...lngs), maxLng = Math.max(...lngs);
-  const minLat = Math.min(...lats), maxLat = Math.max(...lats);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 18,
+  }).addTo(map);
 
-  function project(lat, lng) {
-    const x = pad + ((lng - minLng) / (maxLng - minLng)) * (W - pad * 2);
-    const y = pad + ((maxLat - lat) / (maxLat - minLat)) * (H - pad * 2);
-    return { x, y };
+  // Dashed route polyline
+  const routeCoords = stops.map(s => [s.lat, s.lng]);
+  L.polyline(routeCoords, {
+    color: '#2B5C3F',
+    weight: 2.5,
+    opacity: 0.75,
+    dashArray: '8 6',
+  }).addTo(map);
+
+  // Custom circular marker icon
+  function makeIcon(color, size) {
+    const r = size / 2;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+      <circle cx="${r}" cy="${r}" r="${r - 1.5}" fill="${color}" stroke="#fff" stroke-width="2"/>
+    </svg>`;
+    return L.divIcon({
+      html: svg,
+      className: '',
+      iconSize: [size, size],
+      iconAnchor: [r, r],
+      popupAnchor: [0, -r],
+    });
   }
 
-  const polyPts = stops.map(s => {
-    const { x, y } = project(s.lat, s.lng);
-    return `${x},${y}`;
-  }).join(' ');
-
-  let circlesSVG = '';
-  const seen = new Set();
-
-  stops.forEach((s, i) => {
-    const { x, y } = project(s.lat, s.lng);
-    const isSleep = s.sleep;
-    const isAirport = s.name === 'Milan Malpensa';
-    const r = isSleep || isAirport ? 7 : 5;
-    const key = s.name + s.day;
-    const isFirst = !seen.has(key);
-    if (isFirst) seen.add(key);
-
-    circlesSVG += `<circle cx="${x}" cy="${y}" r="${r + 2}" fill="rgba(0,0,0,0.12)" class="stop-shadow"/>`;
-    circlesSVG += `<circle cx="${x}" cy="${y}" r="${r}" fill="${s.color}" stroke="#fff" stroke-width="1.5" class="stop-dot" data-idx="${i}"/>`;
-
-    if (isSleep || isAirport) {
-      const labelX = x + r + 6;
-      const labelY = y + 4;
-      const anchor = labelX > W - 100 ? 'end' : 'start';
-      const lx = anchor === 'end' ? x - r - 6 : labelX;
-      const shortName = s.name.replace('Milan Malpensa', 'Malpensa')
-        .replace('Lago Maggiore', 'L. Maggiore')
-        .replace('Lago di Carezza', 'Carezza')
-        .replace('Val di Fassa', 'Val di Fassa')
-        .replace('Seceda / Ortisei', 'Ortisei')
-        .replace('Lago di Braies', 'L. Braies')
-        .replace('Rifugio Auronzo', 'Auronzo')
-        .replace('Sorapis / Cortina', 'Cortina')
-        .replace('Lago di Alleghe', 'Alleghe');
-      circlesSVG += `<text x="${lx}" y="${labelY}" text-anchor="${anchor}" font-size="10" font-family="DM Sans, sans-serif" fill="currentColor" opacity="0.7" class="stop-label">${shortName}</text>`;
-    }
+  // Add markers and store references for stop-card clicks
+  const leafletMarkers = stops.map(s => {
+    const size = s.sleep || s.name === 'Milan Malpensa' ? 18 : 12;
+    const marker = L.marker([s.lat, s.lng], { icon: makeIcon(s.color, size) })
+      .addTo(map)
+      .bindPopup(`<strong>${s.name}</strong><br><span style="font-size:11px;color:#888">Day ${s.day}${s.sleep ? ' · sleep' : ''}</span>`);
+    return marker;
   });
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="100%" style="display:block;color:var(--ink)">
-  <defs>
-    <filter id="blur-bg" x="-5%" y="-5%" width="110%" height="110%">
-      <feGaussianBlur stdDeviation="0"/>
-    </filter>
-  </defs>
-  <rect width="${W}" height="${H}" fill="var(--surface2)" rx="0"/>
-  ${[...Array(6)].map((_,i) => {
-    const lng = minLng + (i/5)*(maxLng-minLng);
-    const { x } = project(0, lng);
-    return `<line x1="${x}" y1="${pad/2}" x2="${x}" y2="${H-pad/2}" stroke="currentColor" stroke-width="0.3" opacity="0.1"/>`;
-  }).join('')}
-  ${[...Array(5)].map((_,i) => {
-    const lat = minLat + (i/4)*(maxLat-minLat);
-    const { y } = project(lat, 0);
-    return `<line x1="${pad/2}" y1="${y}" x2="${W-pad/2}" y2="${y}" stroke="currentColor" stroke-width="0.3" opacity="0.1"/>`;
-  }).join('')}
-  <polyline points="${polyPts}" fill="none" stroke="#2B5C3F" stroke-width="2" stroke-dasharray="6 4" opacity="0.7" stroke-linejoin="round" stroke-linecap="round"/>
-  ${circlesSVG}
-  <text x="${W-pad+8}" y="${pad-8}" font-size="11" font-family="DM Sans,sans-serif" fill="currentColor" opacity="0.4" text-anchor="middle">N</text>
-  <line x1="${W-pad+8}" y1="${pad-2}" x2="${W-pad+8}" y2="${pad+10}" stroke="currentColor" stroke-width="1" opacity="0.3"/>
-</svg>`;
-
-  const mapEl = document.getElementById('map');
-  mapEl.innerHTML = svg;
-  mapEl.style.background = 'var(--surface2)';
-  mapEl.style.display = 'flex';
-  mapEl.style.alignItems = 'center';
-  mapEl.style.justifyContent = 'center';
-
+  // Wire up stop card clicks — pan to marker and open popup
   document.querySelectorAll('.map-stop').forEach(card => {
     card.addEventListener('click', () => {
       const idx = parseInt(card.dataset.stopIdx);
-      const dot = mapEl.querySelector(`.stop-dot[data-idx="${idx}"]`);
-      if (dot) {
-        dot.style.transition = 'r 0.2s';
-        const origR = dot.getAttribute('r');
-        dot.setAttribute('r', parseInt(origR) + 4);
-        setTimeout(() => dot.setAttribute('r', origR), 400);
+      const marker = leafletMarkers[idx];
+      if (marker) {
+        map.setView(marker.getLatLng(), 11, { animate: true });
+        marker.openPopup();
       }
       document.querySelectorAll('.map-stop').forEach(c => c.style.borderColor = '');
       card.style.borderColor = 'var(--accent)';
