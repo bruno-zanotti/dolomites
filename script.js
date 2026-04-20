@@ -263,15 +263,11 @@ days.forEach((d, i) => {
 
 const toggle = document.getElementById('themeToggle');
 const label = document.getElementById('themeLabel');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-if (prefersDark) {
-  document.documentElement.setAttribute('data-theme', 'dark');
-  label.textContent = 'Light';
-}
 toggle.addEventListener('click', () => {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
   label.textContent = isDark ? 'Dark' : 'Light';
+  swapMapTiles(isDark ? 'light' : 'dark');
 });
 
 // ── MAP ──
@@ -291,7 +287,24 @@ const stops = [
   { day:9,  name:"Milan Malpensa",     lat:45.6227, lng:8.7282,  sleep:false, emoji:"✈️"  },
 ];
 
-let leafletMap, leafletMarkers;
+let leafletMap, leafletMarkers, currentTile;
+
+const tileUrls = {
+  light: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  dark:  'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+};
+const tileOpts = {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd',
+  maxZoom: 19,
+};
+
+function swapMapTiles(theme) {
+  if (!leafletMap) return;
+  if (currentTile) leafletMap.removeLayer(currentTile);
+  currentTile = L.tileLayer(tileUrls[theme], tileOpts).addTo(leafletMap);
+  currentTile.bringToBack();
+}
 
 (function buildLeafletMap() {
   leafletMap = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([46.3, 11.0], 8);
@@ -304,24 +317,29 @@ let leafletMap, leafletMarkers;
     }
   }, { passive: false });
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains: 'abcd',
-    maxZoom: 19,
-  }).addTo(leafletMap);
+  currentTile = L.tileLayer(tileUrls.light, tileOpts).addTo(leafletMap);
 
-  function makeIcon(emoji) {
+  function makeIcon(isSleep) {
+    if (isSleep) {
+      return L.divIcon({
+        html: `<i class="fa-solid fa-tent" style="font-size:18px;color:#2B5C3F;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.4))"></i>`,
+        className: '',
+        iconSize: [22, 22],
+        iconAnchor: [11, 11],
+        popupAnchor: [0, -14],
+      });
+    }
     return L.divIcon({
-      html: `<div style="font-size:22px;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.35))">${emoji}</div>`,
+      html: `<div style="width:10px;height:10px;border-radius:50%;background:#4A8C65;border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.35)"></div>`,
       className: '',
-      iconSize: [28, 28],
-      iconAnchor: [14, 14],
-      popupAnchor: [0, -16],
+      iconSize: [10, 10],
+      iconAnchor: [5, 5],
+      popupAnchor: [0, -8],
     });
   }
 
   leafletMarkers = stops.map(s =>
-    L.marker([s.lat, s.lng], { icon: makeIcon(s.emoji) })
+    L.marker([s.lat, s.lng], { icon: makeIcon(s.sleep) })
       .addTo(leafletMap)
       .bindPopup(`<strong>${s.name}</strong><br><span style="font-size:11px;color:#888">Day ${s.day}${s.sleep ? ' · sleep' : ''}</span>`)
   );
@@ -351,6 +369,9 @@ function focusMapDay(dayNum) {
   const stopIdx = stops.findIndex(s => s.day === dayNum);
   if (stopIdx === -1) return;
   const marker = leafletMarkers[stopIdx];
-  leafletMap.setView(marker.getLatLng(), 11, { animate: true });
-  marker.openPopup();
+  const latlng = marker.getLatLng();
+  // Offset center slightly south so the location appears in the upper-centre of the map
+  const offset = leafletMap.getZoom() > 9 ? 0.04 : 0.15;
+  leafletMap.flyTo([latlng.lat - offset, latlng.lng], 11, { duration: 0.8 });
+  setTimeout(() => marker.openPopup(), 850);
 }
