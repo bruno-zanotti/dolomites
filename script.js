@@ -53,8 +53,8 @@ const days = [
       {time:"16:30", type:"drive",  label:"Drive to Passo Sella (~30 min)"},
       {time:"18:30", type:"view",   label:"Passo Sella — sunset over Sassolungo & Sella Group"},
     ],
-    sleep:{name:"Passo Sella area or Ortisei", note:"Van parking available · check access restriction below"},
-    warn:"Passo Sella road may close to private vehicles on summer weekends. Check restrictions for late May — use the ski bus shuttle if the road is closed.",
+    sleep:{name:"Ortisei / Val Gardena", note:"Best base for Day 4 — área camper with good facilities"},
+    warn:"Passo Sella road may have access restrictions for private vehicles on summer weekends. Check before driving up — a ski bus shuttle is available as fallback.",
     info:null
   },
   {
@@ -73,7 +73,7 @@ const days = [
       {time:"17:00", type:"view",   label:"Bonus: detour to Passo delle Erbe (~30 min drive)"},
       {time:"19:00", type:"drive",  label:"Return to Ortisei / Siusi for the night"},
     ],
-    sleep:{name:"Ortisei / Siusi", note:"Área camper · good facilities"},
+    sleep:{name:"Ortisei / Siusi", note:"Área camper · good facilities · or advance to Val di Funes to be ready for Day 5 morning"},
     warn:null,
     info:"Arrive at Ortisei cable car by 8:30am to beat crowds and the midday heat. The upper Seceda path costs €5 — go left at the fork, it's worth every cent."
   },
@@ -93,8 +93,8 @@ const days = [
       {time:"19:30", type:"drive",  label:"Drive to Lago di Braies (~1h)"},
       {time:"20:30", type:"view",   label:"Evening stroll along the lake shore"},
     ],
-    sleep:{name:"Lago di Braies", note:"Pre-book mandatory · ~€15/night for campervans"},
-    warn:"Lago di Braies requires pre-booked parking entry in high season. Book at the official site — slots sell out weeks ahead.",
+    sleep:{name:"Lago di Braies", note:"Pre-book mandatory · ~€15/night · fallback: Dobbiaco / Villabassa área camper"},
+    warn:"Lago di Braies requires pre-booked parking entry in high season. Book at the official site — slots sell out weeks ahead. If unavailable, Dobbiaco / Villabassa has reliable área camper options.",
     info:"Time the church viewpoint for 17:00–19:00 — the Odle peaks face west and golden hour completely transforms the scene. Morning visit is fine but the light is flat."
   },
   {
@@ -112,10 +112,10 @@ const days = [
       {time:"13:30", type:"drive",  label:"Drive up to Rifugio Auronzo road (pay €35–40 toll)"},
       {time:"14:00", type:"hike",   label:"Tre Cime di Lavaredo circuit (~10km, 3h)"},
       {time:"17:00", type:"food",   label:"Coffee & strudel at Rifugio Locatelli"},
-      {time:"18:00", type:"drive",  label:"Return to Rifugio Auronzo parking for the night"},
+      {time:"18:00", type:"drive",  label:"Descend toward Misurina / Passo Tre Croci for the night"},
     ],
-    sleep:{name:"Rifugio Auronzo parking", note:"Must reserve in advance · auronzo.it"},
-    warn:"Rifugio Auronzo overnight parking must be booked online in advance — non-negotiable in high season. Also budget ~€35–40 for the national park road toll.",
+    sleep:{name:"Misurina or Passo Tre Croci", note:"Strategic for Day 7 Cadini start · Auronzo overnight is heavily regulated — confirm in advance"},
+    warn:"Budget ~€35–40 for the Rifugio Auronzo national park road toll. Overnight at Auronzo parking is tightly regulated — Misurina or Passo Tre Croci are more reliable sleep spots and better positioned for the Day 7 Cadini sunrise hike.",
     info:null
   },
   {
@@ -136,7 +136,7 @@ const days = [
       {time:"17:00", type:"drive",  label:"Drive to Cortina d'Ampezzo (~15 min)"},
       {time:"19:00", type:"food",   label:"Dinner in Cortina town centre"},
     ],
-    sleep:{name:"Passo Tre Croci or Cortina d'Ampezzo", note:"Cortina has better van facilities + restaurants"},
+    sleep:{name:"Passo Tre Croci · Cortina · or Cinque Torri zone", note:"Cortina has best facilities · Cinque Torri / Falzarego zone is strategic for Day 8"},
     warn:null,
     info:"Start the Cadini hike by 4:30am for a late-May sunrise (~5:20am). For Sorapis parking: arriving after 13:30 can be smarter as early hikers start returning and spots open up."
   },
@@ -153,7 +153,7 @@ const days = [
       {time:"10:30", type:"hike",   label:"Chairlift up + explore Cinque Torri rock towers"},
       {time:"11:30", type:"hike",   label:"WWI open-air museum — original trenches & bunkers"},
       {time:"13:00", type:"food",   label:"Lunch at Rifugio Cinque Torri"},
-      {time:"14:30", type:"view",   label:"Bonus: Lagazuoi cable car to 2,778m (~20 min drive)"},
+      {time:"14:30", type:"view",   label:"Bonus: Lagazuoi cable car to 2,778m + Lago Limedes walk (~20 min drive from Cinque Torri)"},
       {time:"16:00", type:"drive",  label:"Drive south toward Marmolada (~1h)"},
       {time:"17:00", type:"view",   label:"Marmolada glacier approach & viewpoint"},
       {time:"18:30", type:"drive",  label:"Drive to Alleghe (~30 min)"},
