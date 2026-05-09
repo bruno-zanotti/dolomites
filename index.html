@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dolomites Van Trip — 25 May–2 Jun 2026</title>
-<meta property="og:title" content="The Dolomites by Van">
-<meta property="og:description" content="Milan Malpensa · 25 May – 2 Jun 2026 · 9 days · ~750 km · 2 people">
+<title>Viaje en Van por los Dolomitas — 25 May–2 Jun 2026</title>
+<meta property="og:title" content="Los Dolomitas en Van">
+<meta property="og:description" content="Milán Malpensa · 25 may – 2 jun 2026 · 9 días · ~750 km · 2 personas">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bruno-zanotti.github.io/dolomites/">
 <meta property="og:image" content="https://bruno-zanotti.github.io/dolomites/images/Tre_Cime_di_Lavaredo.jpg">
-<meta property="og:image:alt" content="Tre Cime di Lavaredo, Dolomites">
+<meta property="og:image:alt" content="Tre Cime di Lavaredo, Dolomitas">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
-<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar modo oscuro">
   <svg class="toggle-icon icon-moon" viewBox="0 0 14 14" fill="none">
     <path d="M12.5 8.5A5.5 5.5 0 015.5 1.5a5.5 5.5 0 000 11 5.5 5.5 0 007-4z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
   </svg>
@@ -34,7 +34,7 @@
     <line x1="11.07" y1="2.93" x2="10" y2="4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
     <line x1="4" y1="10" x2="2.93" y2="11.07" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
   </svg>
-  <span id="themeLabel">Dark</span>
+  <span id="themeLabel">Oscuro</span>
 </button>
 
 <div class="page">
@@ -44,29 +44,29 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-left">
-        <div class="hero-eyebrow">Van trip · Italy</div>
-        <h1 class="hero-title">The <em>Dolomites</em><br>by van</h1>
-        <p class="hero-sub">Milan Malpensa · 25 May – 2 June 2026 · 2 people</p>
+        <div class="hero-eyebrow">Viaje en van · Italia</div>
+        <h1 class="hero-title">Los <em>Dolomitas</em><br>en van</h1>
+        <p class="hero-sub">Milán Malpensa · 25 de mayo – 2 de junio de 2026 · 2 personas</p>
       </div>
       <div class="hero-meta">
         <div class="hero-meta-item">
           <span class="hero-meta-val">9</span>
-          <span class="hero-meta-lbl">days</span>
+          <span class="hero-meta-lbl">días</span>
         </div>
         <div class="hero-divider"></div>
         <div class="hero-meta-item">
           <span class="hero-meta-val">~750km</span>
-          <span class="hero-meta-lbl">driving</span>
+          <span class="hero-meta-lbl">conduciendo</span>
         </div>
         <div class="hero-divider"></div>
         <div class="hero-meta-item">
           <span class="hero-meta-val">8</span>
-          <span class="hero-meta-lbl">hikes & viewpoints</span>
+          <span class="hero-meta-lbl">rutas y miradores</span>
         </div>
         <div class="hero-divider"></div>
         <div class="hero-meta-item">
           <span class="hero-meta-val">5</span>
-          <span class="hero-meta-lbl">must-book spots</span>
+          <span class="hero-meta-lbl">reservas obligatorias</span>
         </div>
       </div>
     </div>
@@ -79,8 +79,8 @@
       <circle cx="9" cy="12.5" r="0.7" fill="currentColor"/>
     </svg>
     <div class="booking-banner-text">
-      Book before you go —
-      <span>Lago di Braies parking, Rifugio Auronzo overnight, Tre Cime road entry (€35–40). These sell out weeks in advance.</span>
+      Reserva antes de salir —
+      <span>Aparcamiento Lago di Braies, noche en Rifugio Auronzo, acceso carretera Tre Cime (€35–40). Se agotan semanas antes.</span>
     </div>
   </div>
 
@@ -88,20 +88,20 @@
     <aside class="sidebar">
       <div class="timeline" id="timeline"></div>
       <div class="legend">
-        <span class="legend-label">Activities</span>
-        <span class="leg"><span class="leg-dot dot-hike"></span>Hike</span>
-        <span class="leg"><span class="leg-dot dot-view"></span>Viewpoint</span>
-        <span class="leg"><span class="leg-dot dot-drive"></span>Drive</span>
-        <span class="leg"><span class="leg-dot dot-food"></span>Food &amp; rest</span>
+        <span class="legend-label">Actividades</span>
+        <span class="leg"><span class="leg-dot dot-hike"></span>Senderismo</span>
+        <span class="leg"><span class="leg-dot dot-view"></span>Mirador</span>
+        <span class="leg"><span class="leg-dot dot-drive"></span>Conducir</span>
+        <span class="leg"><span class="leg-dot dot-food"></span>Comida y descanso</span>
       </div>
     </aside>
     <div class="map-panel">
       <div class="map-inner">
         <div class="map-container" id="map"></div>
         <div class="map-style-switcher" id="mapStyleSwitcher">
-          <button class="map-style-btn active" data-style="standard">Map</button>
+          <button class="map-style-btn active" data-style="standard">Mapa</button>
           <button class="map-style-btn" data-style="topo">Topo</button>
-          <button class="map-style-btn" data-style="satellite">Satellite</button>
+          <button class="map-style-btn" data-style="satellite">Satélite</button>
         </div>
       </div>
     </div>
@@ -109,11 +109,11 @@
 
   <footer class="footer">
     <div class="footer-stats">
-      <span>9 days · ~750 km · 2 people</span>
+      <span>9 días · ~750 km · 2 personas</span>
       <span class="footer-sep">·</span>
-      <span>Milan Malpensa · 25 May – 2 Jun 2026</span>
+      <span>Milán Malpensa · 25 may – 2 jun 2026</span>
     </div>
-    <span class="footer-title">Buon viaggio ✦</span>
+    <span class="footer-title">Buen viaje ✦</span>
   </footer>
 
 </div>

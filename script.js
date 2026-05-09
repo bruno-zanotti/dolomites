@@ -1,183 +1,183 @@
 const days = [
   {
-    num:1, day:"Mon", date:"25", month:"May",
-    name:"Arrival — Milan & first night",
-    sub:"Van pickup · groceries · dinner in Milan",
+    num:1, day:"Lun", date:"25", month:"May",
+    name:"Llegada — Milán y primera noche",
+    sub:"Recogida de la van · compras · cena en Milán",
     photo:"images/Navigli_Milan.jpg",
-    wikiCaption:"Navigli canals, Milan",
+    wikiCaption:"Canales de Navigli, Milán",
     acts:[
-      {time:"14:40", type:"drive",  label:"Land at Malpensa — collect bags"},
-      {time:"16:00", type:"drive",  label:"Van pickup at rental desk"},
-      {time:"16:45", type:"drive",  label:"Fill up fuel near airport"},
-      {time:"17:15", type:"drive",  label:"Supermarket stop — Esselunga Somma Lombardo"},
-      {time:"18:30", type:"drive",  label:"Park van near Ferno station · train to Milan centre"},
-      {time:"20:00", type:"food",   label:"Dinner in Navigli district, Milan"},
-      {time:"22:30", type:"drive",  label:"Drive toward Lago Maggiore (~1h)"},
+      {time:"14:40", type:"drive",  label:"Aterrizar en Malpensa — recoger el equipaje"},
+      {time:"16:00", type:"drive",  label:"Recoger la van en el mostrador de alquiler"},
+      {time:"16:45", type:"drive",  label:"Llenar el depósito cerca del aeropuerto"},
+      {time:"17:15", type:"drive",  label:"Parada en supermercado — Esselunga Somma Lombardo"},
+      {time:"18:30", type:"drive",  label:"Aparcar la van cerca de la estación de Ferno · tren al centro de Milán"},
+      {time:"20:00", type:"food",   label:"Cena en el barrio de Navigli, Milán"},
+      {time:"22:30", type:"drive",  label:"Conducir hacia el Lago Maggiore (~1h)"},
     ],
-    sleep:{name:"Lago Maggiore area", note:"Park4night · ~€30–50 · 1h from Milan"},
+    sleep:{name:"Zona del Lago Maggiore", note:"Park4night · ~€30–50 · 1h desde Milán"},
     warn:null,
-    info:"Park the van near Ferno–Lonate Pozzolo station and take the direct train to Milan centre (~25 min). Easy first evening — don't push far tonight."
+    info:"Aparca la van cerca de la estación de Ferno–Lonate Pozzolo y toma el tren directo al centro de Milán (~25 min). Primera noche tranquila — no te alejes demasiado."
   },
   {
-    num:2, day:"Tue", date:"26", month:"May",
-    name:"Milan → Lago di Carezza → Val di Fassa",
-    sub:"~4h drive · emerald UNESCO lake · valley base",
+    num:2, day:"Mar", date:"26", month:"May",
+    name:"Milán → Lago di Carezza → Val di Fassa",
+    sub:"~4h en coche · lago esmeralda UNESCO · base en el valle",
     photo:"images/Karersee.jpg",
-    wikiCaption:"Lago di Carezza (Karersee), South Tyrol",
+    wikiCaption:"Lago di Carezza (Karersee), Alto Adigio",
     acts:[
-      {time:"08:00", type:"drive",  label:"Leave Lago Maggiore area"},
-      {time:"09:00", type:"food",   label:"Breakfast stop en route — Trento area"},
-      {time:"11:30", type:"drive",  label:"Arrive Lago di Carezza — pay parking (~€9/3h)"},
-      {time:"11:45", type:"view",   label:"Lago di Carezza loop walk (1–2h)"},
-      {time:"13:30", type:"food",   label:"Lunch at lakeside café"},
-      {time:"14:30", type:"drive",  label:"Drive to Val di Fassa via SS241 (~45 min)"},
-      {time:"15:30", type:"drive",  label:"Settle into Pozza / Vigo di Fassa"},
+      {time:"08:00", type:"drive",  label:"Salir de la zona del Lago Maggiore"},
+      {time:"09:00", type:"food",   label:"Parada de desayuno en ruta — zona de Trento"},
+      {time:"11:30", type:"drive",  label:"Llegar al Lago di Carezza — pagar aparcamiento (~€9/3h)"},
+      {time:"11:45", type:"view",   label:"Paseo circular por el Lago di Carezza (1–2h)"},
+      {time:"13:30", type:"food",   label:"Almuerzo en el café junto al lago"},
+      {time:"14:30", type:"drive",  label:"Conducir hacia Val di Fassa por la SS241 (~45 min)"},
+      {time:"15:30", type:"drive",  label:"Instalarse en Pozza / Vigo di Fassa"},
     ],
-    sleep:{name:"Pozza / Vigo di Fassa", note:"Área camper · easy base for Day 3 hike"},
+    sleep:{name:"Pozza / Vigo di Fassa", note:"Área camper · base cómoda para la ruta del Día 3"},
     warn:null,
-    info:"Arrive at Carezza as early as possible — parking fills fast on sunny mornings. The emerald colour is best when the sun is high."
+    info:"Llega a Carezza lo antes posible — el aparcamiento se llena rápido en mañanas soleadas. El color esmeralda luce mejor con el sol alto."
   },
   {
-    num:3, day:"Wed", date:"27", month:"May",
+    num:3, day:"Mié", date:"27", month:"May",
     name:"Torres del Vajolet + Passo Sella",
-    sub:"Catinaccio towers hike · sunset at 2,240m pass",
+    sub:"Senderismo al Catinaccio · atardecer en el puerto a 2.240m",
     photo:"images/Vajolet_Towers.JPG",
-    wikiCaption:"Torres del Vajolet, Catinaccio massif",
+    wikiCaption:"Torres del Vajolet, macizo del Catinaccio",
     acts:[
-      {time:"08:00", type:"drive",  label:"Drive to Pera di Fassa trailhead (~20 min)"},
-      {time:"08:30", type:"hike",   label:"Cable car up to Rifugio Gardeccia"},
-      {time:"09:00", type:"hike",   label:"Hike to Torres del Vajolet (~1.5h up)"},
-      {time:"11:00", type:"view",   label:"Explore the Catinaccio towers"},
-      {time:"12:30", type:"food",   label:"Lunch at Rifugio Vajolet"},
-      {time:"14:00", type:"hike",   label:"Descent back to valley (~1.5h)"},
-      {time:"16:30", type:"drive",  label:"Drive to Passo Sella (~30 min)"},
-      {time:"18:30", type:"view",   label:"Passo Sella — sunset over Sassolungo & Sella Group"},
+      {time:"08:00", type:"drive",  label:"Conducir al punto de partida de Pera di Fassa (~20 min)"},
+      {time:"08:30", type:"hike",   label:"Teleférico hasta el Rifugio Gardeccia"},
+      {time:"09:00", type:"hike",   label:"Senderismo hacia las Torres del Vajolet (~1,5h de subida)"},
+      {time:"11:00", type:"view",   label:"Explorar las torres del Catinaccio"},
+      {time:"12:30", type:"food",   label:"Almuerzo en el Rifugio Vajolet"},
+      {time:"14:00", type:"hike",   label:"Descenso al valle (~1,5h)"},
+      {time:"16:30", type:"drive",  label:"Conducir hacia el Passo Sella (~30 min)"},
+      {time:"18:30", type:"view",   label:"Passo Sella — atardecer sobre el Sassolungo y el Grupo Sella"},
     ],
-    sleep:{name:"Ortisei / Val Gardena", note:"Best base for Day 4 — área camper with good facilities"},
-    warn:"Passo Sella road may have access restrictions for private vehicles on summer weekends. Check before driving up — a ski bus shuttle is available as fallback.",
+    sleep:{name:"Ortisei / Val Gardena", note:"Mejor base para el Día 4 — área camper con buenas instalaciones"},
+    warn:"La carretera del Passo Sella puede tener restricciones de acceso para vehículos privados en fines de semana de verano. Compruébalo antes de subir — hay un autobús de esquí como alternativa.",
     info:null
   },
   {
-    num:4, day:"Thu", date:"28", month:"May",
+    num:4, day:"Jue", date:"28", month:"May",
     name:"Seceda + Alpe di Siusi",
-    sub:"Iconic blade ridgeline · Europe's largest alpine plateau",
+    sub:"Icónica cresta en cuchilla · mayor meseta alpina de Europa",
     photo:"images/Seceda.jpg",
-    wikiCaption:"Seceda ridgeline and Odle peaks, Val Gardena",
+    wikiCaption:"Cresta de Seceda y picos Odle, Val Gardena",
     acts:[
-      {time:"08:00", type:"drive",  label:"Drive to Ortisei cable car station (~20 min)"},
-      {time:"08:30", type:"hike",   label:"Cable car up to Seceda (2,500m)"},
-      {time:"09:00", type:"hike",   label:"Walk the Seceda ridgeline (~2–3h)"},
-      {time:"11:30", type:"food",   label:"Lunch at Rifugio Firenze / Col Raiser area"},
-      {time:"13:00", type:"drive",  label:"Drive to Alpe di Siusi (~30 min)"},
-      {time:"13:30", type:"view",   label:"Alpe di Siusi plateau — easy loop walk or e-bike"},
-      {time:"17:00", type:"view",   label:"Bonus: detour to Passo delle Erbe (~30 min drive)"},
-      {time:"19:00", type:"drive",  label:"Return to Ortisei / Siusi for the night"},
+      {time:"08:00", type:"drive",  label:"Conducir a la estación del teleférico de Ortisei (~20 min)"},
+      {time:"08:30", type:"hike",   label:"Teleférico hasta Seceda (2.500m)"},
+      {time:"09:00", type:"hike",   label:"Recorrer la cresta de Seceda (~2–3h)"},
+      {time:"11:30", type:"food",   label:"Almuerzo en el Rifugio Firenze / zona del Col Raiser"},
+      {time:"13:00", type:"drive",  label:"Conducir hacia el Alpe di Siusi (~30 min)"},
+      {time:"13:30", type:"view",   label:"Meseta del Alpe di Siusi — paseo circular sencillo o e-bike"},
+      {time:"17:00", type:"view",   label:"Extra: desvío al Passo delle Erbe (~30 min en coche)"},
+      {time:"19:00", type:"drive",  label:"Regresar a Ortisei / Siusi para pasar la noche"},
     ],
-    sleep:{name:"Ortisei / Siusi", note:"Área camper · good facilities · or advance to Val di Funes to be ready for Day 5 morning"},
+    sleep:{name:"Ortisei / Siusi", note:"Área camper · buenas instalaciones · o avanzar a Val di Funes para estar listos la mañana del Día 5"},
     warn:null,
-    info:"Arrive at Ortisei cable car by 8:30am to beat crowds and the midday heat. The upper Seceda path costs €5 — go left at the fork, it's worth every cent."
+    info:"Llega al teleférico de Ortisei a las 8:30h para evitar aglomeraciones y el calor del mediodía. El camino alto de Seceda cuesta €5 — gira a la izquierda en el cruce, vale cada céntimo."
   },
   {
-    num:5, day:"Fri", date:"29", month:"May",
+    num:5, day:"Vie", date:"29", month:"May",
     name:"Val di Funes → Lago di Braies",
-    sub:"THE postcard church · golden hour · turquoise lake arrival",
+    sub:"LA postal de los Dolomitas · hora dorada · llegada al lago turquesa",
     photo:"images/Val_di_Funes.jpg",
-    wikiCaption:"Santa Maddalena church, Val di Funes",
+    wikiCaption:"Iglesia de Santa Maddalena, Val di Funes",
     acts:[
-      {time:"09:00", type:"drive",  label:"Drive to Val di Funes — Santa Maddalena (~35 min)"},
-      {time:"09:30", type:"view",   label:"Morning walk in Val di Funes valley"},
-      {time:"11:00", type:"food",   label:"Lunch in Santa Maddalena village"},
-      {time:"13:00", type:"drive",  label:"Relaxed afternoon — explore valley roads"},
-      {time:"16:30", type:"view",   label:"Hike up to Santa Maddalena church viewpoint (~20 min)"},
-      {time:"17:30", type:"view",   label:"Golden hour — Odle peaks light up behind the church"},
-      {time:"19:30", type:"drive",  label:"Drive to Lago di Braies (~1h)"},
-      {time:"20:30", type:"view",   label:"Evening stroll along the lake shore"},
+      {time:"09:00", type:"drive",  label:"Conducir a Val di Funes — Santa Maddalena (~35 min)"},
+      {time:"09:30", type:"view",   label:"Paseo matutino por el valle de Val di Funes"},
+      {time:"11:00", type:"food",   label:"Almuerzo en el pueblo de Santa Maddalena"},
+      {time:"13:00", type:"drive",  label:"Tarde relajada — explorar las carreteras del valle"},
+      {time:"16:30", type:"view",   label:"Subir al mirador de la iglesia de Santa Maddalena (~20 min)"},
+      {time:"17:30", type:"view",   label:"Hora dorada — los picos Odle se iluminan tras la iglesia"},
+      {time:"19:30", type:"drive",  label:"Conducir al Lago di Braies (~1h)"},
+      {time:"20:30", type:"view",   label:"Paseo vespertino a orillas del lago"},
     ],
-    sleep:{name:"Lago di Braies", note:"Pre-book mandatory · ~€15/night · fallback: Dobbiaco / Villabassa área camper"},
-    warn:"Lago di Braies requires pre-booked parking entry in high season. Book at the official site — slots sell out weeks ahead. If unavailable, Dobbiaco / Villabassa has reliable área camper options.",
-    info:"Time the church viewpoint for 17:00–19:00 — the Odle peaks face west and golden hour completely transforms the scene. Morning visit is fine but the light is flat."
+    sleep:{name:"Lago di Braies", note:"Reserva obligatoria · ~€15/noche · alternativa: área camper en Dobbiaco / Villabassa"},
+    warn:"El Lago di Braies requiere reserva previa de entrada en temporada alta. Reserva en el sitio oficial — los plazos se agotan semanas antes. Si no hay disponibilidad, Dobbiaco / Villabassa tiene áreas camper de confianza.",
+    info:"Llega al mirador de la iglesia entre las 17:00 y las 19:00 — los picos Odle dan al oeste y la hora dorada transforma completamente la escena. La visita de mañana está bien, pero la luz es plana."
   },
   {
-    num:6, day:"Sat", date:"30", month:"May",
-    name:"Braies · Misurina lakes · Tre Cime",
-    sub:"Morning rowboat · scenic lake chain · iconic 10km circuit",
+    num:6, day:"Sáb", date:"30", month:"May",
+    name:"Braies · Lagos de Misurina · Tre Cime",
+    sub:"Barca de remos al amanecer · cadena de lagos · circuito icónico de 10km",
     photo:"images/Pragser_Wildsee.jpg",
     wikiCaption:"Lago di Braies (Pragser Wildsee)",
     acts:[
-      {time:"07:00", type:"view",   label:"Early morning walk — lake before the crowds arrive"},
-      {time:"09:00", type:"view",   label:"Rowboat on Lago di Braies (opens 9am, €55/45 min)"},
-      {time:"10:30", type:"drive",  label:"Drive via Lago di Dobbiaco & Lago di Landro (~45 min)"},
-      {time:"11:30", type:"view",   label:"Lago di Misurina — 2.6km loop walk (~45 min)"},
-      {time:"12:30", type:"food",   label:"Lunch at Misurina village"},
-      {time:"13:30", type:"drive",  label:"Drive up to Rifugio Auronzo road (pay €35–40 toll)"},
-      {time:"14:00", type:"hike",   label:"Tre Cime di Lavaredo circuit (~10km, 3h)"},
-      {time:"17:00", type:"food",   label:"Coffee & strudel at Rifugio Locatelli"},
-      {time:"18:00", type:"drive",  label:"Descend toward Misurina / Passo Tre Croci for the night"},
+      {time:"07:00", type:"view",   label:"Paseo temprano — el lago antes de que lleguen las masas"},
+      {time:"09:00", type:"view",   label:"Barca de remos en el Lago di Braies (abre 9h, €55/45 min)"},
+      {time:"10:30", type:"drive",  label:"Conducir por el Lago di Dobbiaco y el Lago di Landro (~45 min)"},
+      {time:"11:30", type:"view",   label:"Lago di Misurina — paseo circular de 2,6km (~45 min)"},
+      {time:"12:30", type:"food",   label:"Almuerzo en el pueblo de Misurina"},
+      {time:"13:30", type:"drive",  label:"Subir por la carretera del Rifugio Auronzo (peaje €35–40)"},
+      {time:"14:00", type:"hike",   label:"Circuito de las Tre Cime di Lavaredo (~10km, 3h)"},
+      {time:"17:00", type:"food",   label:"Café y strudel en el Rifugio Locatelli"},
+      {time:"18:00", type:"drive",  label:"Descender hacia Misurina / Passo Tre Croci para pasar la noche"},
     ],
-    sleep:{name:"Misurina or Passo Tre Croci", note:"Strategic for Day 7 Cadini start · Auronzo overnight is heavily regulated — confirm in advance"},
-    warn:"Budget ~€35–40 for the Rifugio Auronzo national park road toll. Overnight at Auronzo parking is tightly regulated — Misurina or Passo Tre Croci are more reliable sleep spots and better positioned for the Day 7 Cadini sunrise hike.",
+    sleep:{name:"Misurina o Passo Tre Croci", note:"Estratégico para el inicio del Día 7 en Cadini · pernoctar en Auronzo está muy regulado — confirmar con antelación"},
+    warn:"Presupuesta ~€35–40 para el peaje de la carretera del parque nacional hasta el Rifugio Auronzo. Pernoctar en el aparcamiento de Auronzo está muy regulado — Misurina o Passo Tre Croci son opciones más fiables y mejor situadas para la salida al amanecer del Cadini del Día 7.",
     info:null
   },
   {
-    num:7, day:"Sun", date:"31", month:"May",
-    name:"Cadini sunrise + Lago di Sorapis",
-    sub:"Pre-dawn viewpoint · glacial turquoise lake hike",
+    num:7, day:"Dom", date:"31", month:"May",
+    name:"Amanecer en Cadini + Lago di Sorapis",
+    sub:"Mirador antes del alba · senderismo al lago glacial turquesa",
     photo:"images/Tre_Cime_di_Lavaredo.jpg",
-    wikiCaption:"Tre Cime di Lavaredo, Sexten Dolomites",
+    wikiCaption:"Tre Cime di Lavaredo, Dolomitas de Sexten",
     acts:[
-      {time:"04:30", type:"hike",   label:"Start hike to Cadini viewpoint — trail 117 (~45 min up)"},
-      {time:"05:20", type:"view",   label:"Sunrise at Cadini di Misurina — Tre Cime behind the spires"},
-      {time:"06:30", type:"hike",   label:"Descend back to van · breakfast + rest"},
-      {time:"09:00", type:"drive",  label:"Drive down to Passo Tre Croci parking (~25 min)"},
-      {time:"09:30", type:"hike",   label:"Lago di Sorapis hike — start (~5km each way, 2.5h up)"},
-      {time:"12:00", type:"view",   label:"Lago di Sorapis — milky turquoise glacial lake"},
-      {time:"12:30", type:"food",   label:"Lunch at Rifugio Vandelli by the lake"},
-      {time:"14:30", type:"hike",   label:"Descent back to Passo Tre Croci (~2h)"},
-      {time:"17:00", type:"drive",  label:"Drive to Cortina d'Ampezzo (~15 min)"},
-      {time:"19:00", type:"food",   label:"Dinner in Cortina town centre"},
+      {time:"04:30", type:"hike",   label:"Inicio de la subida al mirador del Cadini — sendero 117 (~45 min)"},
+      {time:"05:20", type:"view",   label:"Amanecer en Cadini di Misurina — las Tre Cime tras las agujas"},
+      {time:"06:30", type:"hike",   label:"Descender a la van · desayuno y descanso"},
+      {time:"09:00", type:"drive",  label:"Bajar al aparcamiento del Passo Tre Croci (~25 min)"},
+      {time:"09:30", type:"hike",   label:"Inicio de la ruta al Lago di Sorapis (~5km ida, 2,5h de subida)"},
+      {time:"12:00", type:"view",   label:"Lago di Sorapis — lago glacial de turquesa lechoso"},
+      {time:"12:30", type:"food",   label:"Almuerzo en el Rifugio Vandelli junto al lago"},
+      {time:"14:30", type:"hike",   label:"Descenso al Passo Tre Croci (~2h)"},
+      {time:"17:00", type:"drive",  label:"Conducir a Cortina d'Ampezzo (~15 min)"},
+      {time:"19:00", type:"food",   label:"Cena en el centro de Cortina"},
     ],
-    sleep:{name:"Passo Tre Croci · Cortina · or Cinque Torri zone", note:"Cortina has best facilities · Cinque Torri / Falzarego zone is strategic for Day 8"},
+    sleep:{name:"Passo Tre Croci · Cortina · o zona de Cinque Torri", note:"Cortina tiene las mejores instalaciones · la zona Cinque Torri / Falzarego es estratégica para el Día 8"},
     warn:null,
-    info:"Start the Cadini hike by 4:30am for a late-May sunrise (~5:20am). For Sorapis parking: arriving after 13:30 can be smarter as early hikers start returning and spots open up."
+    info:"Empieza la ruta al Cadini a las 4:30h para ver el amanecer a finales de mayo (~5:20h). Para aparcar en Sorapis: llegar después de las 13:30 puede ser más inteligente, pues los senderistas madrugadores empiezan a regresar y se liberan plazas."
   },
   {
-    num:8, day:"Mon", date:"1", month:"Jun",
+    num:8, day:"Lun", date:"1", month:"Jun",
     name:"Passo Giau · Cinque Torri · Marmolada · Alleghe",
-    sub:"Finest pass in the Dolomites · WWI museum · glacier · final night",
+    sub:"El mejor puerto de los Dolomitas · museo de la I Guerra Mundial · glaciar · última noche",
     photo:"images/Passo_Giau.jpg",
-    wikiCaption:"Passo Giau (2,233m), Dolomites",
+    wikiCaption:"Passo Giau (2.233m), Dolomitas",
     acts:[
-      {time:"08:00", type:"drive",  label:"Drive up to Passo Giau (2,233m) — ~30 min from Cortina"},
-      {time:"08:30", type:"view",   label:"Passo Giau — 360° panorama, walk the meadows"},
-      {time:"10:00", type:"drive",  label:"Drive to Cinque Torri chairlift (~20 min)"},
-      {time:"10:30", type:"hike",   label:"Chairlift up + explore Cinque Torri rock towers"},
-      {time:"11:30", type:"hike",   label:"WWI open-air museum — original trenches & bunkers"},
-      {time:"13:00", type:"food",   label:"Lunch at Rifugio Cinque Torri"},
-      {time:"14:30", type:"view",   label:"Bonus: Lagazuoi cable car to 2,778m + Lago Limedes walk (~20 min drive from Cinque Torri)"},
-      {time:"16:00", type:"drive",  label:"Drive south toward Marmolada (~1h)"},
-      {time:"17:00", type:"view",   label:"Marmolada glacier approach & viewpoint"},
-      {time:"18:30", type:"drive",  label:"Drive to Alleghe (~30 min)"},
-      {time:"20:00", type:"food",   label:"Dinner in Alleghe — last mountain evening"},
+      {time:"08:00", type:"drive",  label:"Subir al Passo Giau (2.233m) — ~30 min desde Cortina"},
+      {time:"08:30", type:"view",   label:"Passo Giau — panorama de 360°, paseo por los prados"},
+      {time:"10:00", type:"drive",  label:"Conducir hasta el telesilla de Cinque Torri (~20 min)"},
+      {time:"10:30", type:"hike",   label:"Telesilla + explorar las torres de roca de Cinque Torri"},
+      {time:"11:30", type:"hike",   label:"Museo al aire libre de la I Guerra Mundial — trincheras y búnkeres originales"},
+      {time:"13:00", type:"food",   label:"Almuerzo en el Rifugio Cinque Torri"},
+      {time:"14:30", type:"view",   label:"Extra: teleférico del Lagazuoi hasta 2.778m + paseo al Lago Limedes (~20 min en coche desde Cinque Torri)"},
+      {time:"16:00", type:"drive",  label:"Conducir al sur hacia la Marmolada (~1h)"},
+      {time:"17:00", type:"view",   label:"Acercamiento al glaciar de la Marmolada y mirador"},
+      {time:"18:30", type:"drive",  label:"Conducir a Alleghe (~30 min)"},
+      {time:"20:00", type:"food",   label:"Cena en Alleghe — última velada en la montaña"},
     ],
-    sleep:{name:"Alleghe", note:"Last mountain night · lakeside área camper"},
+    sleep:{name:"Alleghe", note:"Última noche en la montaña · área camper junto al lago"},
     warn:null,
-    info:"This is a full day — if energy is low after the early Cadini start, skip Lagazuoi or Marmolada. Passo Giau + Cinque Torri alone is a perfect day."
+    info:"Este es un día completo — si la energía está baja tras el madrugón del Cadini, omite el Lagazuoi o la Marmolada. Passo Giau + Cinque Torri solos son ya un día perfecto."
   },
   {
-    num:9, day:"Tue", date:"2", month:"Jun",
-    name:"Return to Milan Malpensa",
-    sub:"~4.5h drive · van return by 18:00",
+    num:9, day:"Mar", date:"2", month:"Jun",
+    name:"Regreso a Milán Malpensa",
+    sub:"~4,5h en coche · devolver la van antes de las 18:00",
     photo:"images/Alleghe.JPG",
-    wikiCaption:"Lago di Alleghe with the Civetta massif",
+    wikiCaption:"Lago di Alleghe con el macizo del Civetta",
     acts:[
-      {time:"07:00", type:"drive",  label:"Leave Alleghe — early start essential"},
-      {time:"08:30", type:"food",   label:"Breakfast stop in Bolzano old town (~1h stop)"},
-      {time:"10:00", type:"drive",  label:"A22 autostrada north → Brennero → A4 west"},
-      {time:"12:00", type:"drive",  label:"Fill up fuel before reaching Malpensa"},
-      {time:"13:00", type:"drive",  label:"Van return at Malpensa rental desk (deadline 18:00)"},
+      {time:"07:00", type:"drive",  label:"Salir de Alleghe — la salida temprana es imprescindible"},
+      {time:"08:30", type:"food",   label:"Parada de desayuno en el casco antiguo de Bolzano (~1h)"},
+      {time:"10:00", type:"drive",  label:"Autopista A22 norte → Brennero → A4 oeste"},
+      {time:"12:00", type:"drive",  label:"Llenar el depósito antes de llegar a Malpensa"},
+      {time:"13:00", type:"drive",  label:"Devolver la van en el mostrador de alquiler de Malpensa (límite 18:00)"},
     ],
-    sleep:{name:"Flight home", note:"Fill up fuel before returning — most rentals require a full tank"},
-    warn:"2 June is Republic Day in Italy — national holiday. Expect significantly heavier traffic on the A4 toward Milan. Leaving Alleghe by 7am is not optional.",
+    sleep:{name:"Vuelo a casa", note:"Llena el depósito antes de devolver la van — la mayoría de alquileres exigen el depósito lleno"},
+    warn:"El 2 de junio es el Día de la República en Italia — festivo nacional. Espera tráfico significativamente más denso en la A4 hacia Milán. Salir de Alleghe a las 7h no es opcional.",
     info:null
   }
 ];
@@ -221,7 +221,7 @@ days.forEach((d, i) => {
     <div class="day-card">
       <div class="card-header">
         <div class="card-header-left">
-          <div class="card-day-label">Day ${d.num}</div>
+          <div class="card-day-label">Día ${d.num}</div>
           <div class="card-name">${d.name}</div>
           <div class="card-sub">${d.sub}</div>
         </div>
@@ -232,9 +232,9 @@ days.forEach((d, i) => {
         </div>
       </div>
       <div class="card-body">
-        ${d.photo ? `<div class="card-photo" id="photo-${d.num}"><div class="photo-skeleton">Loading photo…</div></div>` : ''}
+        ${d.photo ? `<div class="card-photo" id="photo-${d.num}"><div class="photo-skeleton">Cargando foto…</div></div>` : ''}
         <div class="card-body-inner">
-          <div class="acts-label">Schedule</div>
+          <div class="acts-label">Horario</div>
           <div class="acts">${actsHtml}</div>
           <div class="sleep-section">
             ${iconSleep}
@@ -268,7 +268,7 @@ const label = document.getElementById('themeLabel');
 toggle.addEventListener('click', () => {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  label.textContent = isDark ? 'Dark' : 'Light';
+  label.textContent = isDark ? 'Oscuro' : 'Claro';
 });
 
 // ── MAP ──
@@ -348,7 +348,7 @@ function setMapStyle(style) {
   leafletMarkers = stops.map(s =>
     L.marker([s.lat, s.lng], { icon: makeIcon(s.sleep) })
       .addTo(leafletMap)
-      .bindPopup(`<strong>${s.name}</strong><br><span style="font-size:11px;color:#888">Day ${s.day}${s.sleep ? ' · sleep' : ''}</span>`)
+      .bindPopup(`<strong>${s.name}</strong><br><span style="font-size:11px;color:#888">Día ${s.day}${s.sleep ? ' · dormir' : ''}</span>`)
   );
 
   // Draw straight-line fallback, then replace with real road geometry from OSRM
